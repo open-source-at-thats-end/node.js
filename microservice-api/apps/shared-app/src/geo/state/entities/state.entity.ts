@@ -20,8 +20,8 @@ import { BusinessEntity } from "apps/shared-app/src/businesses/business/entities
 @Unique(`${UnIndexPrefix}state_country_id`,[`country_id`, `name`, `type`])
 export class StateEntity implements EntityCRUDTypeDefinition {
     
-    static colprefix: string = `state_`;
-    static uploaddir: string = `geo-state`;
+    static colprefix: string = ``;
+    static uploaddir: string = ``;
     
     static metaname: string = (StateEntity.name).replace(EntitySuffix, '');
     static metadesc: string = `Provides list of states for countries.`;

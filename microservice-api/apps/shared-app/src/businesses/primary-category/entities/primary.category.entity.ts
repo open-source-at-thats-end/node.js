@@ -13,8 +13,8 @@ import { BusinessEntity } from "../../business/entities/business.entity";
 })
 export class BusinessPrimaryCategoryEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = `buspricat_`;
-    static uploaddir: string = `business-primary-category`;
+    static colprefix: string = ``;
+    static uploaddir: string = ``;
 
     static metaname: string = (BusinessPrimaryCategoryEntity.name).replace(EntitySuffix, '');
     static metadesc: string = 'Provides list of business primary category.';

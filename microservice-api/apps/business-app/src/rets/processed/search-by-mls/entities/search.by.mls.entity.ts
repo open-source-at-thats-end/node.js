@@ -12,8 +12,8 @@ import { RetsMlsProviderEntity } from "../../../listings/mls-provider/entities/m
 })
 export class ProcessedSearchByMlsEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = 'rpsmls_';
-    static uploaddir: string = 'rets-processed-search-by-mls';
+    static colprefix: string = '';
+    static uploaddir: string = '';
     
     static metaname: string = (ProcessedSearchByMlsEntity.name).replace(EntitySuffix, '');
     static metadesc: string = 'Provide processed search by mls.';

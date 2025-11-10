@@ -20,8 +20,8 @@ import { TimezoneEntity } from "../../timezone/entities/timezone.entity";
 @Unique(`${UnIndexPrefix}city_state_id`,[`state_id`, `name`, `latitude`])
 export class CityEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = `city_`;
-    static uploaddir: string = `geo-city`;
+    static colprefix: string = ``;
+    static uploaddir: string = ``;
 
     static metaname: string = (CityEntity.name).replace(EntitySuffix, '');
     static metadesc: string = `Provides list of cities for states.`;

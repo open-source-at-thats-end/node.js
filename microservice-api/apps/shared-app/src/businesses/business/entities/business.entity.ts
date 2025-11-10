@@ -20,8 +20,8 @@ import { ConnectionSourceEntity } from "apps/shared-app/src/leads/connection/sou
 @Unique(`${UnIndexPrefix}busns_mobile`,[`mobile`, `mobile_cc`])
 export class BusinessEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = `busns_`;
-    static uploaddir: string = `business`;
+    static colprefix: string = ``;
+    static uploaddir: string = ``;
 
     static metaname: string = (BusinessEntity.name).replace(EntitySuffix, '');
     static metadesc: string = 'Provides list of business.';

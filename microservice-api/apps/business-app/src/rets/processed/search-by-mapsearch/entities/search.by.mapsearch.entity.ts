@@ -12,8 +12,8 @@ import { Directive, Field, Float, Int, ObjectType } from "@nestjs/graphql";
 @Unique(`${UnIndexPrefix}rpsm_mls_num`,[`mls_num`, `mlsp_id`, `street_number`, `street_direction`, `street_name`, `street_suffix`, `city_name`, `state`, `county`, `zipcode`])
 export class ProcessedSearchByMapSearchEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = 'rpsm_';
-    static uploaddir: string = 'rets-processed-search-by-mapsearch';
+    static colprefix: string = '';
+    static uploaddir: string = '';
     
     static metaname: string = (ProcessedSearchByMapSearchEntity.name).replace(EntitySuffix, '');
     static metadesc: string = 'Provide processed search by mapsearch.';

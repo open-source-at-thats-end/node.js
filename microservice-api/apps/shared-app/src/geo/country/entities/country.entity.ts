@@ -24,8 +24,8 @@ import { BusinessEntity } from "apps/shared-app/src/businesses/business/entities
 
 export class CountryEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = `country_`;
-    static uploaddir: string = `geo-country`;
+    static colprefix: string = ``;
+    static uploaddir: string = ``;
 
     static metaname: string = (CountryEntity.name).replace(EntitySuffix, '');
     static metadesc: string = 'Provides list of countries in the world.';

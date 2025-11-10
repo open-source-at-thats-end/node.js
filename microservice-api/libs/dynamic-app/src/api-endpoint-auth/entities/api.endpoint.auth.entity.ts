@@ -13,8 +13,8 @@ import { DateTime, EntityCRUDTypeDefinition, EntityMetaCRUDTypeDefinition, Entit
   engine: 'InnoDB',
 })
 export class ApiEndpointAuthEntity implements EntityCRUDTypeDefinition {
-  static colprefix: string = `aepu_`;
-  static uploaddir: string = `api-end-point-auth`;
+  static colprefix: string = ``;
+  static uploaddir: string = ``;
 
   static metaname: string = (ApiEndpointAuthEntity.name).replace(EntitySuffix, '');
   static metadesc: string = 'API acceess users, managed by API webmaster.';

@@ -13,8 +13,8 @@ import { BusinessEntity } from "../../business/entities/business.entity";
 })
 export class BusinessSecondaryCategoryEntity implements EntityCRUDTypeDefinition {
 
-    static colprefix: string = `busseccat_`;
-    static uploaddir: string = `business-secondary-category`;
+    static colprefix: string = ``;
+    static uploaddir: string = ``;
 
     static metaname: string = (BusinessSecondaryCategoryEntity.name).replace(EntitySuffix, '');
     static metadesc: string = 'Provides list of business secondary category.';
