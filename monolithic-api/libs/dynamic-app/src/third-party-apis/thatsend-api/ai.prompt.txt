@@ -1,0 +1,270 @@
+SDL Patterns
+
+Entity Modules: For each entity E there is type EEntity plus standard Queries/Mutations named consistently (e.g., AcademicDegree, Business, Country, CrawlerLead). See first block around AcademicDegree for the full set (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:6, 17, 81, 89, 119, 195, 205).
+Operations Set:
+Queries: EFind(filter: EFindInput!): EFindOutput!, EFindOneById(input: EFindOneByIdInput!): EEntity! (e.g., CountryFind/CountryFindOneById).
+Mutations: ECreate, EUpdate, ESoftDelete, EDelete, ERestore, EUpsert, ESoftRemove, ERemove, ERecover with matching *Input/*Output. Bulk create/upsert use array inputs [ECreateInput!]! / [EUpsertInput!]!.
+Find Pattern:
+EFindInput: skip, take, withDeleted, where: [EFindInputWhere!], groupBy, order (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:119).
+FindOperatorDto: operators equal, notEqual, like, into, between, lt/lte, mt/mte, nulls, matchFun (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:16491).
+EFindOutput: total, remain, pages, take, pagination: FindOutputPagination, rows: [EFindOutputRows!]! (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:1659). Pagination types: FindOutputPage and FindOutputPagination (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:16539, 16550).
+Relations Pattern: Entities and where-clauses include related data via fr_<relatedEntity>; relation filters accept nested [RelatedFindInputWhere!]. Example: fr_academic_field (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:112–210).
+Field Naming: Consistent snake_case. Lifecycle fields created/updated/deleted: DateTime. Some statuses modeled as DateTime presence (e.g., active, suspended).
+Auth Surface (global):
+Mutations: GraphSignup, GraphSignin, GraphRefreshJWT, GraphResetPassword, GraphSignout (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:22593, 23633, 23636, 23640, 23644).
+Queries: HelloGraph, GraphWhoAmI (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:39220, 39232).
+Types: GraphLoginInput/Output, GraphSignupInput/Output, GraphResetPassword* (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:17059–17180).
+Crawler Lead: CrawlerLeadUpsert(input: [CrawlerLeadUpsertInput!]!): [CrawlerLeadUpsertOutput!]!; CrawlerLeadUpsertInput has many optional fields and required crawler_stage: String! (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:12692, 12952, 26797).
+Scalars/Enums/Directives:
+Scalars: DateTime, EmailAddress, IP, JSON, JSONObject, JWT, MAC, Upload (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:13218, 14163, 17689–17704, 21525, 70084).
+Enums: RecordSortDirectionEnum { ASC, DESC }, many domain enums (e.g., ApiUserRoleEnum, YesNoEnum) (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:43689, 85943).
+Directive: @oneOf on input objects (libs/dynamic-app/src/third-party-apis/thatsend-api/schema.graphql:4).
+Dev Plan (Pattern-Aligned)
+
+Auth layer: Complete graphSignup/graphSignout; align refresh to GraphLoginOutput; centralize token store/refresh and header injection.
+Find utilities: Helper to compose EFindInput from a simple TS builder (maps predicates to FindOperatorDto, sets order, skip/take).
+Entity services: For each needed entity, expose find, findOneById, create/upsert, update, softRemove/delete/restore/recover consistent with SDL names.
+Pagination types: Mirror FindOutputPagination/FindOutputRows in TS for stable responses; wrap common pagination handling.
+Batching: Chunk array inputs for [Create|Upsert]; add backoff/retries.
+Error mapping: Normalize GraphQL errors → domain exceptions with redaction.
+
+=========================================================================
+Development Pattern
+
+Everythign will go inside module
+/libs/dynamic-app/src/third-party-apis/thatsend-api
+
+First you need to think and find a way to develop a module whcih allow use to perform various graphql operation
+Need to follow below pattern to code
+
+Need to create module for each entity
+entry name will become module name and create folder of it
+inside creaate 
+*.module.ts [standard nestjs module]
+*.service.ts [real time business logic whcih allow us to make api call and get data]
+*.entity.ts [entity class or type etc whatever is suitable]
+*.dto.ts [all types dto for api to work -  need to find if calss of type need to define]
+*.type.ts [any specific type only for this module - if required]
+*.enum.ts [any specific enum only for this module - if required]
+create required file as needed in similar pattern
+
+file name pattern will use dot (.) for spce
+folder name pattern will use dash (-) for spce
+
+We need to code as a nestJS module
+Which allow use to use all feature of that entity available in API as per SDL
+
+If there are some common types, enums or any type of code add those in
+thatsend.api.enum.ts
+thatsend.api.type.ts
+or create relevent file
+Understand the common things properly so we do not duplicate it.
+
+There are some entity which depends on another entity so we will use nestjs import feature
+relation must be implemented in query and mutation
+there must be easy way to set fileds for response as its graphql api
+Module should be easely to mantain as per api changes and upgrade
+code must be easy and in pattern so all modules follow similar tone
+
+Take some idea from existing module graph and crawler-lead
+Those are not fully developed, it was just for your reference
+We will reimplement those one you get idea about develop
+so those are temporary we need to find solid solution to develop robust api
+
+first we will start with master entity which are standaloan
+give me a plan as per provided detail for 1 entity - AcademicDegree
+Let me check and after we will go for implementation
+
+
+First as a trial we will go for 2 entity depends on each other
+AcademicDegree
+AcademicField
+create modules for both which allow us to use all features of api
+
+=========================================================================
+Single module features
+
+Implemented all SDL operations for both modules: Find, FindOneById, Create, Update, SoftDelete, Delete, Restore, Upsert, SoftRemove, Remove, Recover.
+Added relation filters and selections exactly as SDL defines:
+AcademicDegree: fr_academic_field in filters and returned in rows/affectedRows.
+AcademicField: fr_academic_degrees in filters and returned in rows/affectedRows.
+Upsert outputs include upsert_process (UpsertStatusEnum) and relation nodes as per SDL.
+Inputs
+
+Find input: supports skip, take, withDeleted, where: [], groupBy, order.
+Where operators: full FindOperatorDto set wired (equal, notEqual, like, notLike, into, notInto, between, notBetween, lt, lte, mt, mte, nulls, matchFun).
+Relation where:
+Degree: fr_academic_field: [AcademicFieldFindInputWhere!]
+Field: fr_academic_degrees: [AcademicDegreeFindInputWhere!]
+Update input sets per SDL:
+Degree sets: acadfield_id, title, desc
+Field sets: title, desc
+Outputs
+
+Find output: returns total, remain, pages, take, pagination { first/previous/current/next/last }, and rows (entity).
+Mutations:
+Create/Upsert: return entity with relations; Upsert also returns upsert_process.
+Update/SoftRemove/Remove/Recover: return affected, snapshot, and affectedRows including relations.
+Delete/SoftDelete/Restore: return affected and snapshot.
+Field Selection (GraphQL)
+
+New helper thatsend.api.select.ts enables per-call selection:
+DegreeService:
+find(filter, { rowSelect, metaSelect })
+findOneById(input, { select })
+create(input[], { select })
+upsert(input[], { select })
+update(input, { affectedRowSelect })
+softRemove/remove/recover(input, { affectedRowSelect })
+FieldService mirrors the same.
+Accepts:
+String: 'id title'
+Array: ['id','title']
+Object: { id: true, title: true, fr_academic_field: { id: true } }
+
+Degrees by field title:
+await degree.find(
+  { where: [{ fr_academic_field: [{ title: { like: '%Engineering%' } }] }], take: 10 },
+  { rowSelect: { id: true, title: true, fr_academic_field: { title: true } } }
+);
+
+Update with related rows returned:
+await degree.update(
+  { where: [{ id: { equal: '10' } }], sets: { title: 'B.Eng.' } },
+  { affectedRowSelect: { id: true, title: true, fr_academic_field: { title: true } } }
+);
+
+AcademicField list, custom meta:
+await field.find(
+  { take: 5 },
+  { metaSelect: 'total take', rowSelect: { id: true, title: true, fr_academic_degrees: ['id','title'] } }
+);
+
+Files (key)
+
+Degree: academic-degree/* (module, service, dto, entity)
+Field: academic-field/* (module, service, dto, entity)
+Shared: thatsend.api.type.ts, thatsend.api.enum.ts, thatsend.api.select.ts
+Deep Check Notes
+
+All CRUD and soft/hard variants matched to SDL for both entities.
+Relation filters and returns are aligned with fr_* definitions.
+Upsert outputs include upsert_process enum as per SDL.
+Find operator, grouping, ordering, withDeleted supported.
+Delete/SoftDelete/Restore output shapes (affected + snapshot) match SDL.
+
+metaSelect: Optional GraphQL selection string for the find(...) methods that controls which FindOutput meta fields are returned (e.g., total, remain, pages, take, and pagination { ... }).
+Default Selection: total remain pages take pagination { first { page count skip } previous { page count skip } current { page count skip } next { page count skip } last { page count skip } }
+
+Only counts:
+await degreeService.find({ take: 10 }, { metaSelect: 'total take' });
+
+Current page only:
+await academicFieldService.find(
+  { take: 10 },
+  { metaSelect: 'pagination { current { page count skip } }' }
+);
+
+Combine with row selection:
+await degreeService.find(
+  { take: 5 },
+  {
+    metaSelect: 'total pagination { current { page } }',
+    rowSelect: { id: true, title: true },
+  }
+);
+
+metaSelect customizes only the meta portion of the FindOutput. Use rowSelect for rows, select for single-entity (findOneById/create/upsert), and affectedRowSelect for mutation results.
+It’s a raw GraphQL selection snippet; invalid fields will cause a GraphQL error.
+
+
+Type Safety Coverage
+
+Inputs/DTOs: All CRUD methods use typed DTOs for each entity (create/update/upsert/delete/soft*/restore/recover/find). Field shapes and types mirror the SDL.
+Where conditions: Added typed builders so you don’t pass raw strings for numeric/date fields.
+Selections: Row, single-entity and mutation affectedRows selections are now generically typed to the entity interfaces.
+Meta selection: You can select meta fields with a typed options object (no stringly-typed mistakes).
+What I added to ensure type safety
+
+Typed selection shapes
+File: libs/dynamic-app/src/third-party-apis/thatsend-api/thatsend.api.select.ts:1
+Types:
+SelectShape<T>: typed, nested selection keyed by entity fields (relations included).
+FindMetaOptions: typed meta fields for FindOutput (total, remain, pages, take, pagination).
+Helpers:
+buildSelection<T>(select, fallback): renders a selection set from SelectShape<T>.
+buildFindMetaSelect(opts): renders a valid meta selection string from FindMetaOptions.
+Typed where builders
+File: libs/dynamic-app/src/third-party-apis/thatsend-api/thatsend.api.where.ts:1
+API: ops.s (string), ops.n (number), ops.dt (Date/ISO)
+Coerces numeric/date inputs to the SDL’s string-based FindOperatorDto shape at compile time.
+Examples:
+ops.n.equal(42) → { equal: "42" }
+ops.dt.between(new Date('2024-01-01'), new Date('2024-12-31')) → { between: ["2024-01-01T...", "2024-12-31T..."] }
+Services updated with typed options
+
+AcademicDegreeService (rows and affectedRows selection typed to AcademicDegreeEntity)
+libs/dynamic-app/src/third-party-apis/thatsend-api/academic-degree/academic.degree.service.ts:1
+Methods now accept:
+find(filter, { rowSelect?: SelectShape<AcademicDegreeEntity>, metaSelect?: string, metaOptions?: FindMetaOptions })
+findOneById(input, { select?: SelectShape<AcademicDegreeEntity> })
+create(input[], { select?: SelectShape<AcademicDegreeEntity> })
+upsert(input[], { select?: SelectShape<AcademicDegreeEntity> })
+update(input, { affectedRowSelect?: SelectShape<AcademicDegreeEntity> })
+softRemove/remove/recover(input, { affectedRowSelect?: SelectShape<AcademicDegreeEntity> })
+AcademicFieldService (typed similarly to AcademicFieldEntity)
+libs/dynamic-app/src/third-party-apis/thatsend-api/academic-field/academic.field.service.ts:1
+
+Usage examples (fully type-safe)
+
+Type-safe where (numbers/dates):
+import { ops } from 'libs/dynamic-app/src/third-party-apis/thatsend-api/thatsend.api.where';
+
+// Degrees where id = 10 and created between dates
+await degreeService.find({
+  where: [
+    { id: ops.n.equal(10) },
+    { created: ops.dt.between('2024-01-01T00:00:00Z', new Date('2024-12-31T23:59:59Z')) },
+  ],
+});
+
+Typed row selection with relations:
+await degreeService.find(
+  { take: 5 },
+  { rowSelect: { id: true, title: true, fr_academic_field: { id: true, title: true } } }
+);
+
+Typed meta selection:
+await fieldService.find(
+  { take: 10 },
+  { metaOptions: { total: true, pagination: { current: ['page', 'count'] } } }
+);
+
+Mutation affectedRows selection:
+await degreeService.update(
+  { where: [{ title: ops.s.like('%Sci%') }], sets: { desc: 'Updated' } },
+  { affectedRowSelect: ['id', 'title'] }
+);
+
+
+What remains string-based (by design)
+If you still provide raw string selections, the helper accepts them as an escape hatch, but for strict type safety prefer SelectShape<T> and FindMetaOptions.
+
+Summary
+Yes: operations, fields, values, where conditions, and meta selection are now type-safe with compile-time support, while preserving the SDL’s string-encoded operator requirements under the hood. If you want, I can add a brief README section in thatsend.api.ai.txt showing these patterns and best practices.
+=========================================================================
+Robustness Toward SDL Changes
+
+Current code mirrors SDL features for these two entities (CRUD, relation filters, relation selections, upsert status).
+Next hardening steps (I can add if you want):
+Fragments: centralize row selections per entity so one update propagates to all queries/mutations.
+Schema check script: parse schema.graphql and validate that our DTOs and selections include required fields (e.g., ensure UpsertOutput has upsert_process, relation names match). Wire it to an npm script to catch diffs early.
+If this satisfies the SDL requirements, I can implement the fragment approach and a schema check script next, then proceed to the next master entity.
+
+If you want “no-drift” robustness, I can add a schema guard script to parse schema.graphql, validate our default selections/DTOs against SDL, and flag differences automatically. Want me to add that next?
+
+If you want “no-drift” guarantees, I can add a schema guard script that parses schema.graphql and validates our selections/DTOs against the SDL to flag any changes automatically. Proceed?
+
+If you want extra safety, I can add a schema guard script to compare our DTOs/selections to schema.graphql and flag drift automatically.
+=========================================================================
+Add a brief README section in thatsend-api/readme.txt showing all these patterns and best practices.
