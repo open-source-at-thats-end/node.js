@@ -103,28 +103,18 @@ export class ApiEndpointAuthUserService {
       for(let i = 0; i < input.length; i++){
         post.push(this.repository.create(input[i]));
       }
-      return (await this.repository.save(post)) as GraphSignupOutputDto[];
+      return new GraphSignupOutputDto(); // code removed
     } else {
       const post = this.repository.create(input);
-      return (await this.repository.save(post)) as GraphSignupOutputDto;
+      return new GraphSignupOutputDto(); // code removed
     }
   }
   async signUp(input: GraphSignupInputDto | GraphSignupInputDto[]): Promise<GraphSignupOutputDto | GraphSignupOutputDto[]> {
     try{
       const row = await this.authCreate(input);
       
-      // set some jwt token related notice in respected field
-      const aNotice = `Login to get JWT access token`;
-      const rNotice = `Login to get JWT refresh token`;
-      if(Array.isArray(row)) {
-        for(let i = 0; i < row.length; i++){
-          row[i].jwt_access_token = aNotice;
-          row[i].jwt_refresh_token = rNotice;
-        }
-      } else {
-        row.jwt_access_token = aNotice;
-        row.jwt_refresh_token = rNotice;
-      }
+       // code removed for security reason
+
       return row;
     } catch (err: any) {
       this.logService.error(err, err.message);
@@ -134,41 +124,7 @@ export class ApiEndpointAuthUserService {
 
   async signIn(input: GraphLoginInputDto): Promise<GraphLoginOutputDto> {
     try{
-      // get the user for authentication, , if not found then it will throw exception
-      const user = await this.findOneForAuth(input.username);
-      
-      // verify user auth policy to process further, if not valid then it will throw exception
-      await this.verifyAuthPolicy(user);
-      
-      // check if password match
-      const match = await LibraryAppService.matchHash(user.identify as string, input.identify as string);
-      if(match === true) {
-        // check if currect JWT is expired or not, if it's active then use it and do not generate new
-        let tokens: JWTToken = await this.apiEndpointAuthJwt.verifyTokens(user.jwt_access_token, user.jwt_refresh_token);
-        
-        // if tokes are really expired then create new one
-        if(!tokens.access_token || tokens.access_token === null || !tokens.refresh_token ||tokens.refresh_token === null) {
-          // create new strict type and generate new tokens
-          type RT = MakeRequiredType<ApiEndpointAuthEntity>;
-          tokens = await this.apiEndpointAuthJwt.generateTokens<RT>(user as RT) as any as JWTToken;  
-
-          user.jwt_access_token = tokens.access_token;
-          user.jwt_refresh_token = tokens.refresh_token;
-
-          // update jwt in database
-          await this.updateJwtTokens(
-            user.id as any as number,
-            user.jwt_access_token,
-            user.jwt_refresh_token
-          );
-        }
-        
-        // remove some sensitive data fields
-        delete user.identify;
-        delete user.suspended;
-        delete user.deleted;
-
-        // we need to return user profile also from UserService
+        // code removed for security reason
         return user as GraphLoginOutputDto;
       } 
       throw new BadRequestException(`Email and password does not match, try agian.`);
@@ -182,40 +138,7 @@ export class ApiEndpointAuthUserService {
     try {
       const refreshTokePayload: JWTTokenPayload = await this.apiEndpointAuthJwt.getRefreshTokePayload(jwtRefreshToken);
       if(refreshTokePayload.sub){
-        const subid = await ApiEndpointAuthJwtService.decSubId(refreshTokePayload.sub);
-        
-        // get the user for authentication, , if not found then it will throw exception
-        const user = await this.findOneForAuth(parseInt(subid, 10));
-
-        // verify user auth policy to process further, if not valid then it will throw exception
-        await this.verifyAuthPolicy(user);
-
-        // check if currect JWT is expired or not, if it's active then use it and do not generate new
-        let tokens: JWTToken = await this.apiEndpointAuthJwt.verifyTokens(user.jwt_access_token, user.jwt_refresh_token);
-
-        // if tokes are really expired then create new one
-        if(!tokens.access_token || tokens.access_token === null || !tokens.refresh_token ||tokens.refresh_token === null) {
-          // create new strict type and generate tokens
-          type RT = MakeRequiredType<ApiEndpointAuthEntity>;
-          tokens = await this.apiEndpointAuthJwt.refreshTokens<RT>(refreshTokePayload, user as RT) as any as JWTToken;
-
-          user.jwt_access_token = tokens.access_token;
-          user.jwt_refresh_token = tokens.refresh_token;
-
-          // update jwt in database
-          await this.updateJwtTokens(
-            user.id as any as number,
-            user.jwt_access_token,
-            user.jwt_refresh_token
-          );
-        }
-
-        // this is possible that user has old refresh JWT and at this time new is found in database but in any case id will be there in token
-        if(user.id === parseInt(subid, 10)) {
-          // remove some sensitive data fields
-          delete user.identify;
-          delete user.suspended;
-          delete user.deleted;
+          // code removed for security reason
 
           // we need to return user profile also from UserService
           return user as GraphLoginOutputDto;
@@ -231,32 +154,7 @@ export class ApiEndpointAuthUserService {
 
   async resetPassword(input: GraphResetPasswordInputDto): Promise<GraphResetPasswordOutputDto> {
     try{
-      // check if refresh token is valid
-      const refreshTokePayload: JWTTokenPayload = await this.apiEndpointAuthJwt.getRefreshTokePayload(input.jwt_refresh_token);
-      
-      const jwt_subid = await ApiEndpointAuthJwtService.decSubId(refreshTokePayload.sub);
-      const jwt_username = refreshTokePayload.username;
-
-      // get the user for authentication, , if not found then it will throw exception
-      const user = await this.findOneForAuth(parseInt(jwt_subid, 10));
-
-      // check if user is valid for reset password
-      if(
-          user.jwt_refresh_token === input.jwt_refresh_token && 
-          user.id === parseInt(jwt_subid, 10) &&
-          user.username === jwt_username &&
-          user.username === input.username
-        ) {
-        
-        // verify user auth policy to process further, if not valid then it will throw exception
-        await this.verifyAuthPolicy(user);
-
-        // perform password update
-        const resp = await this.repository.update({id: user.id}, {identify: input.identify})
-
-        if(resp.affected === 1){
-          return await this.repository.findOneBy({id: user.id}) as any as GraphResetPasswordOutputDto
-        }
+        // code removed for security reason
 
         throw new InternalServerErrorException(`Unable to reset password for username ${user.username}. Please try again or contact administrator.`);
       }
@@ -274,7 +172,6 @@ export class ApiEndpointAuthUserService {
       if(resp !== null)
         return resp;
 
-      const i = await LibraryAppService.base64Enc(user.id);
       throw new NotFoundException(`Api endpoint authentication id '${i}' not found.`);
     } catch (err: any) {
       this.logService.error(err, err.message);
@@ -284,12 +181,7 @@ export class ApiEndpointAuthUserService {
 
   async signOut(user: JWTAuthGuardApiEnpointAuthUserPayload, context: GraphQLExecutionContext): Promise<boolean> {
     try {
-      const resp = await this.repository.update({id: user.id as any as number}, {jwt_access_token: null, jwt_refresh_token: null});
-    
-      if(resp.affected === 1)
-        return true;
-      
-      const i = await LibraryAppService.base64Enc(user.id);
+      // code removed for security reason
       throw new NotFoundException(`Signout failed. Api endpoint authentication id '${i}' not found. Invalid JWT token.`);
     } catch (err: any) {
       this.logService.error(err, err.message);
