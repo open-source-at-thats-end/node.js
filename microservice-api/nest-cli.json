@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/app/src",
+  "monorepo": true,
+  "root": "apps/app",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/app/tsconfig.app.json"
+  },
+  "projects": {
+    "library-app": {
+      "type": "library",
+      "root": "libs/library-app",
+      "entryFile": "index",
+      "sourceRoot": "libs/library-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/library-app/tsconfig.lib.json"
+      }
+    },
+    "dynamic-app": {
+      "type": "library",
+      "root": "libs/dynamic-app",
+      "entryFile": "index",
+      "sourceRoot": "libs/dynamic-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/dynamic-app/tsconfig.lib.json"
+      }
+    },
+    "app": {
+      "type": "application",
+      "root": "apps/app",
+      "entryFile": "main",
+      "sourceRoot": "apps/app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/app/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "**/templates/**/*",
+            "outDir": "dist/apps/app",
+            "watchAssets": true
+          },
+          {
+            "include": "../../rest-app/src/**/templates/**/*",
+            "outDir": "dist/apps/rest-app",
+            "watchAssets": true
+          },
+          {
+            "include": "../../../libs/library-app/src/**/templates/**/*",
+            "outDir": "dist/libs/library-app",
+            "watchAssets": true
+          },
+          {
+            "include": "../../../libs/dynamic-app/src/**/templates/**/*",
+            "outDir": "dist/libs/dynamic-app",
+            "watchAssets": true
+          }
+        ]
+      }
+    },
+    "shared-app": {
+      "type": "application",
+      "root": "apps/shared-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/shared-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/shared-app/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "**/templates/**/*",
+            "outDir": "dist/apps/shared-app",
+            "watchAssets": true
+          }
+        ]
+      }
+    },
+    "business-app": {
+      "type": "application",
+      "root": "apps/business-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/business-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/business-app/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "**/templates/**/*",
+            "outDir": "dist/apps/business-app",
+            "watchAssets": true
+          }
+        ]
+      }
+    },
+    "ws-app": {
+      "type": "application",
+      "root": "apps/ws-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/ws-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ws-app/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "**/templates/**/*",
+            "outDir": "dist/apps/ws-app",
+            "watchAssets": true
+          }
+        ]
+      }
+    },
+    "rest-app": {
+      "type": "application",
+      "root": "apps/rest-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/rest-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rest-app/tsconfig.app.json"
+      }
+    }
+  }
+}
