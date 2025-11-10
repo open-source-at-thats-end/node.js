@@ -50,43 +50,43 @@ deleted: {
 
 };
 const  BusinessSecondaryCategoryVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-  fr_primary_categories: {
+  fkey_primary_categories: {
     desc: `business primary categories.`,
     validation: {}
   },
-  fr_buiss_sec_categories1: {
+  fkey_buiss_sec_categories1: {
     desc: `Businesses related to secondary category 1.`,
     validation: {},
   },
-  fr_buiss_sec_categories2: {
+  fkey_buiss_sec_categories2: {
     desc: `Businesses related to secondary category 2.`,
     validation: {},
   },
-  fr_buiss_sec_categories3: {
+  fkey_buiss_sec_categories3: {
     desc: `Businesses related to secondary category 3.`,
     validation: {},
   },
-  fr_buiss_sec_categories4: {
+  fkey_buiss_sec_categories4: {
     desc: `Businesses related to secondary category 4.`,
     validation: {},
   },
-  fr_buiss_sec_categories5: {
+  fkey_buiss_sec_categories5: {
     desc: `Businesses related to secondary category 5.`,
     validation: {},
   },
-  fr_buiss_sec_categories6: {
+  fkey_buiss_sec_categories6: {
     desc: `Businesses related to secondary category 6.`,
     validation: {},
   },
-  fr_buiss_sec_categories7: {
+  fkey_buiss_sec_categories7: {
     desc: `Businesses related to secondary category 7.`,
     validation: {},
   },
-  fr_buiss_sec_categories8: {
+  fkey_buiss_sec_categories8: {
     desc: `Businesses related to secondary category 8.`,
     validation: {},
   },
-  fr_buiss_sec_categories9: {
+  fkey_buiss_sec_categories9: {
     desc: `Businesses related to secondary category 9.`,
     validation: {},
   },
@@ -196,47 +196,47 @@ export class BusinessSecondaryCategoryEntity implements EntityCRUDTypeDefinition
 
     @Field(() => BusinessPrimaryCategoryEntity, {
         nullable: true, 
-        description: meta.fr_primary_categories.desc,
+        description: meta.fkey_primary_categories.desc,
     })
-    @ManyToOne(() => BusinessPrimaryCategoryEntity, (entity: BusinessPrimaryCategoryEntity) => entity.fr_secondary_categories)
+    @ManyToOne(() => BusinessPrimaryCategoryEntity, (entity: BusinessPrimaryCategoryEntity) => entity.fkey_secondary_categories)
     @JoinColumn({ name: `${BusinessSecondaryCategoryEntity.colprefix}buspricat_id` })
-    fr_primary_categories?: BusinessPrimaryCategoryEntity;
+    fkey_primary_categories?: BusinessPrimaryCategoryEntity;
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories1.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories1)
-    fr_buiss_sec_categories1?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories1.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories1)
+    fkey_buiss_sec_categories1?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories2.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories2)
-    fr_buiss_sec_categories2?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories2.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories2)
+    fkey_buiss_sec_categories2?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories3.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories3)
-    fr_buiss_sec_categories3?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories3.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories3)
+    fkey_buiss_sec_categories3?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories4.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories4)
-    fr_buiss_sec_categories4?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories4.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories4)
+    fkey_buiss_sec_categories4?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories5.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories5)
-    fr_buiss_sec_categories5?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories5.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories5)
+    fkey_buiss_sec_categories5?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories6.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories6)
-    fr_buiss_sec_categories6?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories6.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories6)
+    fkey_buiss_sec_categories6?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories7.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories7)
-    fr_buiss_sec_categories7?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories7.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories7)
+    fkey_buiss_sec_categories7?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories8.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories8)
-    fr_buiss_sec_categories8?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories8.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories8)
+    fkey_buiss_sec_categories8?: BusinessEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_buiss_sec_categories9.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_secondary_categories9)
-    fr_buiss_sec_categories9?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_buiss_sec_categories9.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_secondary_categories9)
+    fkey_buiss_sec_categories9?: BusinessEntity[];
 
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
 }

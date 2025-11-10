@@ -172,39 +172,39 @@ const  CountryEntityFieldMeta: EntityMetaCRUDTypeDefinition = {
   }
 };
 const  CountryVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-  fr_states: {
+  fkey_states: {
       desc: `List of states for this country.`,
       validation:{}
   },
-  fr_region: {
+  fkey_region: {
       desc: `Region info of the country.`,
       validation:{}
   },
-  fr_subregion: {
+  fkey_subregion: {
     desc: `List of subregions for this country.`,
     validation:{}
   },
-  fr_user_addresses:{
+  fkey_user_addresses:{
     desc: `List of user address for this country.`,
     validation: {}
   },
-  fr_user_identity_cards:{
+  fkey_user_identity_cards:{
     desc: `List of user identity cards for this country.`,
     validation: {}
   },
-  fr_user_corporate_infos:{
+  fkey_user_corporate_infos:{
     desc: `List of user corporate infos for this country.`,
     validation: {}
   },
-  fr_country_languagies:{
+  fkey_country_languagies:{
     desc: `List of languages for this country`,
     validation: {}
   }, 
-  fr_country_timezone:{
+  fkey_country_timezone:{
     desc: `List of timezone for this country`,
     validation: {}
   },
-  fr_business:{
+  fkey_business:{
     desc: `List of business for this country`,
     validation: {}
   },
@@ -556,51 +556,51 @@ export class CountryEntity implements EntityCRUDTypeDefinition {
 
     @Field(() => [StateEntity], {
       nullable: true, 
-      description: meta.fr_states.desc,
+      description: meta.fkey_states.desc,
       //complexity: 1
     })
-    @OneToMany(() => StateEntity, (entity: StateEntity) => entity.fr_country) 
-    fr_states?: StateEntity[];
+    @OneToMany(() => StateEntity, (entity: StateEntity) => entity.fkey_country) 
+    fkey_states?: StateEntity[];
 
     @Field(() => RegionEntity, {
       nullable: true, 
-      description: meta.fr_region.desc,
+      description: meta.fkey_region.desc,
     })
-    @ManyToOne(() => RegionEntity, (entity: RegionEntity) => entity.fr_countries)
+    @ManyToOne(() => RegionEntity, (entity: RegionEntity) => entity.fkey_countries)
     @JoinColumn({ name: `${CountryEntity.colprefix}region_id` })
-    fr_region?: RegionEntity;
+    fkey_region?: RegionEntity;
 
     @Field(() => SubregionEntity, {
       nullable: true, 
-      description: meta.fr_region.desc,
+      description: meta.fkey_region.desc,
     })
-    @ManyToOne(() => SubregionEntity, (entity: SubregionEntity) => entity.fr_countries)
+    @ManyToOne(() => SubregionEntity, (entity: SubregionEntity) => entity.fkey_countries)
     @JoinColumn({ name: `${CountryEntity.colprefix}subregion_id` })
-    fr_subregion?: SubregionEntity;
+    fkey_subregion?: SubregionEntity;
 
-    @Field(() => [UserAddressEntity], {nullable: true, description: meta.fr_user_addresses.desc})
-    @OneToMany(() => UserAddressEntity, (entity: UserAddressEntity) => entity.fr_country)
-    fr_user_addresses?: UserAddressEntity[];
+    @Field(() => [UserAddressEntity], {nullable: true, description: meta.fkey_user_addresses.desc})
+    @OneToMany(() => UserAddressEntity, (entity: UserAddressEntity) => entity.fkey_country)
+    fkey_user_addresses?: UserAddressEntity[];
 
-    @Field(() => [UserIdentityCardEntity], {nullable: true, description: meta.fr_user_identity_cards.desc})
-    @OneToMany(() => UserIdentityCardEntity, (entity: UserIdentityCardEntity) => entity.fr_country)
-    fr_user_identity_cards?: UserIdentityCardEntity[];
+    @Field(() => [UserIdentityCardEntity], {nullable: true, description: meta.fkey_user_identity_cards.desc})
+    @OneToMany(() => UserIdentityCardEntity, (entity: UserIdentityCardEntity) => entity.fkey_country)
+    fkey_user_identity_cards?: UserIdentityCardEntity[];
 
-    @Field(() => [UserCorporateInfoEntity], {nullable: true, description: meta.fr_user_corporate_infos.desc})
-    @OneToMany(() => UserCorporateInfoEntity, (entity: UserCorporateInfoEntity) => entity.fr_country)
-    fr_user_corporate_infos?: UserCorporateInfoEntity[];
+    @Field(() => [UserCorporateInfoEntity], {nullable: true, description: meta.fkey_user_corporate_infos.desc})
+    @OneToMany(() => UserCorporateInfoEntity, (entity: UserCorporateInfoEntity) => entity.fkey_country)
+    fkey_user_corporate_infos?: UserCorporateInfoEntity[];
 
-    @Field(() => [CountryLanguageEntity], {nullable: true, description: meta.fr_country_languagies.desc})
-    @OneToMany(() => CountryLanguageEntity, (entity: CountryLanguageEntity) => entity.fr_country)
-    fr_country_languagies?: CountryLanguageEntity[];
+    @Field(() => [CountryLanguageEntity], {nullable: true, description: meta.fkey_country_languagies.desc})
+    @OneToMany(() => CountryLanguageEntity, (entity: CountryLanguageEntity) => entity.fkey_country)
+    fkey_country_languagies?: CountryLanguageEntity[];
 
-    @Field(() => [CountryTimezoneEntity], {nullable: true, description: meta.fr_country_timezone.desc})
-    @OneToMany(() => CountryTimezoneEntity, (entity: CountryTimezoneEntity) => entity.fr_country)
-    fr_country_timezone?: CountryTimezoneEntity[];
+    @Field(() => [CountryTimezoneEntity], {nullable: true, description: meta.fkey_country_timezone.desc})
+    @OneToMany(() => CountryTimezoneEntity, (entity: CountryTimezoneEntity) => entity.fkey_country)
+    fkey_country_timezone?: CountryTimezoneEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_business.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_countries)
-    fr_business?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_business.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_countries)
+    fkey_business?: BusinessEntity[];
  
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
 }

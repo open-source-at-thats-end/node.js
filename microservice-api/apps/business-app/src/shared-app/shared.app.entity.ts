@@ -14,7 +14,7 @@ export class BusinessAppFr {
 @Directive('@key(fields: "id")')
 export class ThirdPartyPlatformEntity extends BusinessAppFr  {
     @Field(() => [RetsListingEntity], { nullable: true })
-    fr_rets_listing?: RetsListingEntity[];
+    fkey_rets_listing?: RetsListingEntity[];
 }
 
 // TODO: SUPERGRAPH_FOREIGN_RELATION step 3 - add new UserEntity for SharedApp microservice
@@ -23,16 +23,16 @@ export class ThirdPartyPlatformEntity extends BusinessAppFr  {
 export class UserEntity  extends BusinessAppFr {
 
     @Field(() => [UserFavouritePropertyEntity], { nullable: true })
-    fr_user_favs?: UserFavouritePropertyEntity[];
+    fkey_user_favs?: UserFavouritePropertyEntity[];
 
     @Field(() => [UserFavouritePropertyEntity], { nullable: true })
-    fr_created_user_favs?: UserFavouritePropertyEntity[];
+    fkey_created_user_favs?: UserFavouritePropertyEntity[];
 
     @Field(() => [UserSavedSearchEntity], { nullable: true })
-    fr_user_search?: UserSavedSearchEntity[];
+    fkey_user_search?: UserSavedSearchEntity[];
 
     @Field(() => [UserSavedSearchEntity], { nullable: true })
-    fr_created_user_search?: UserSavedSearchEntity[];
+    fkey_created_user_search?: UserSavedSearchEntity[];
 }
 
 // TODO: SUPERGRAPH_FOREIGN_RELATION step 3 - add new AuthorisationEntity for SharedApp microservice
@@ -40,7 +40,7 @@ export class UserEntity  extends BusinessAppFr {
 @Directive('@key(fields: "id")')
 export class AuthorisationEntity  extends BusinessAppFr {
     @Field(() => [UserSavedSearchEntity], { nullable: true })
-    fr_user_auth_save_search?: UserSavedSearchEntity[];
+    fkey_user_auth_save_search?: UserSavedSearchEntity[];
 }
 
 // TODO: SUPERGRAPH_FOREIGN_RELATION step 3 - add new AlertDurationEntity for SharedApp microservice
@@ -48,6 +48,6 @@ export class AuthorisationEntity  extends BusinessAppFr {
 @Directive('@key(fields: "id")')
 export class AlertDurationEntity  extends BusinessAppFr {
     @Field(() => [UserSavedSearchEntity], { nullable: true })
-    fr_user_save_search?: UserSavedSearchEntity[];
+    fkey_user_save_search?: UserSavedSearchEntity[];
 }
 

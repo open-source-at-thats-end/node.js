@@ -128,7 +128,7 @@ ref_id_field: string;
  * 
  * for example:
  * product has multiple images and there is a product_image entity
- * so, ref_relation: 'fr_product' on product_image entity
+ * so, ref_relation: 'fkey_product' on product_image entity
  * make sure the relation is set in your entity
  * 
  * this is the @ManyToOne relation field name of the entity

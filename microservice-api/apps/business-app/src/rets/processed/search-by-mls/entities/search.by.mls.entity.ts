@@ -61,7 +61,7 @@ const  ProcessedSearchByMlsEntityFieldMeta: EntityMetaCRUDTypeDefinition = {
   };
 
 const  ProcessedSearchByMlsVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-  fr_mlsp_id: {
+  fkey_mlsp_id: {
     desc: `MLSP ID of the processed search by mls.`,
     validation: {}
   }
@@ -173,10 +173,10 @@ export class ProcessedSearchByMlsEntity implements EntityCRUDTypeDefinition {
 
     // ████ INTERNAL RELATIONS ████████████████████████████████████████████████
 
-    @Field(() => RetsMlsProviderEntity, {nullable: true, description: meta.fr_mlsp_id.desc})
-    @ManyToOne(() => RetsMlsProviderEntity, (entity: RetsMlsProviderEntity) => entity.fr_search_by_mls_mlsp_id)
+    @Field(() => RetsMlsProviderEntity, {nullable: true, description: meta.fkey_mlsp_id.desc})
+    @ManyToOne(() => RetsMlsProviderEntity, (entity: RetsMlsProviderEntity) => entity.fkey_search_by_mls_mlsp_id)
     @JoinColumn({ name: `${ProcessedSearchByMlsEntity.colprefix}mlsp_id` })
-    fr_mlsp_id?: RetsMlsProviderEntity;
+    fkey_mlsp_id?: RetsMlsProviderEntity;
   
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
         

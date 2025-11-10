@@ -30,5 +30,5 @@ export class ProcessedSearchByMlsDto extends ProcessedSearchByMlsEntity implemen
     declare updated?: any;
     declare deleted?: any;
 
-    declare fr_mlsp_id?:any;    
+    declare fkey_mlsp_id?:any;    
 }

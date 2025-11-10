@@ -45,12 +45,12 @@ deleted: {
 };
 const  BusinessPrimaryCategoryVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
 
-    fr_secondary_categories: {
+    fkey_secondary_categories: {
       desc: `Business secondary category.`,
       validation: {}
     }, 
 
-    fr_business_categories: {
+    fkey_business_categories: {
       desc: `Business primary category.`,
       validation: {}
     }, 
@@ -149,13 +149,13 @@ export class BusinessPrimaryCategoryEntity implements EntityCRUDTypeDefinition {
 
     // ████ INTERNAL RELATIONS ████████████████████████████████████████████████
 
-    @Field(() => [BusinessSecondaryCategoryEntity], {nullable: true, description: meta.fr_secondary_categories.desc})
-    @OneToMany(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_primary_categories)
-    fr_secondary_categories?: BusinessSecondaryCategoryEntity[];
+    @Field(() => [BusinessSecondaryCategoryEntity], {nullable: true, description: meta.fkey_secondary_categories.desc})
+    @OneToMany(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_primary_categories)
+    fkey_secondary_categories?: BusinessSecondaryCategoryEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_business_categories.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_primary_categories)
-    fr_business_categories?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_business_categories.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_primary_categories)
+    fkey_business_categories?: BusinessEntity[];
 
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
 }

@@ -36,10 +36,10 @@ export class CityDto extends CityEntity implements FindInputDtoCRUDTypeDefinitio
     declare updated?: any;
     declare deleted?: any;
 
-    declare fr_state?: any;
-    declare fr_timezone?: any;
-    declare fr_user_addresses?: any;
-    declare fr_user_identity_cards?: any;
-    declare fr_user_corporate_infos?: any;
-    declare fr_newsletter_tracking_log_infos?: any;
+    declare fkey_state?: any;
+    declare fkey_timezone?: any;
+    declare fkey_user_addresses?: any;
+    declare fkey_user_identity_cards?: any;
+    declare fkey_user_corporate_infos?: any;
+    declare fkey_newsletter_tracking_log_infos?: any;
 }

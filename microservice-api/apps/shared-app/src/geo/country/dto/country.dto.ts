@@ -56,12 +56,12 @@ export class CountryDto extends CountryEntity implements FindInputDtoCRUDTypeDef
     declare updated?: any; 
     declare deleted?: any;
 
-    declare fr_states?: any;
-    declare fr_region?: any;
-    declare fr_subregion?: any;
-    declare fr_user_addresses?: any;
-    declare fr_user_identity_cards?: any;
-    declare fr_user_corporate_infos?: any;
-    declare fr_country_languagies?: any;
-    declare fr_country_timezone?: any;
+    declare fkey_states?: any;
+    declare fkey_region?: any;
+    declare fkey_subregion?: any;
+    declare fkey_user_addresses?: any;
+    declare fkey_user_identity_cards?: any;
+    declare fkey_user_corporate_infos?: any;
+    declare fkey_country_languagies?: any;
+    declare fkey_country_timezone?: any;
 }

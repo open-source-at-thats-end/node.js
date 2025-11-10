@@ -546,7 +546,7 @@ const  ProcessedSearchByMapSearchEntityFieldMeta: EntityMetaCRUDTypeDefinition =
   };
 
 const  ProcessedSearchByMapSearchVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-  fr_mlsp_id: {
+  fkey_mlsp_id: {
     desc: `MLSP ID of the processed search by mapsearch.`,
     validation: {}
   }

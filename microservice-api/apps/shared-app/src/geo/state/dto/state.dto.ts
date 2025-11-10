@@ -37,9 +37,9 @@ export class StateDto extends StateEntity implements FindInputDtoCRUDTypeDefinit
     declare updated?: any;
     declare deleted?: any;
 
-    declare fr_country?: any;
-    declare fr_cities?: any;
-    declare fr_user_addresses?: any;
-    declare fr_user_identity_cards?: any;
-    declare fr_user_corporate_infos?: any;
+    declare fkey_country?: any;
+    declare fkey_cities?: any;
+    declare fkey_user_addresses?: any;
+    declare fkey_user_identity_cards?: any;
+    declare fkey_user_corporate_infos?: any;
 }

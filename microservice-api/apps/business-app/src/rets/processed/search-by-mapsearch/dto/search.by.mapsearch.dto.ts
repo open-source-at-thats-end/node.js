@@ -118,5 +118,5 @@ export class ProcessedSearchByMapSearchDto extends ProcessedSearchByMapSearchEnt
      declare updated?: any;
      declare deleted?: any;  
 
-     declare fr_mlsp_id?:any;    
+     declare fkey_mlsp_id?:any;    
 }

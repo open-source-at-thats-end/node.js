@@ -54,35 +54,35 @@ const CityEntityFieldMeta: EntityMetaCRUDTypeDefinition = {
 };
 
 const  CityVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-    fr_state:{
+    fkey_state:{
         desc: `State info of the city.`,
         validation:{}
     },
-    fr_timezone:{
+    fkey_timezone:{
         desc: `Timezone info of the city.`,
         validation:{}
     },
-    fr_clients: {
+    fkey_clients: {
         desc: `List of clients in this city.`,
         validation:{}
     },
-    fr_user_addresses:{
+    fkey_user_addresses:{
         desc: `List of user address in this city.`,
         validation:{}
     },
-    fr_user_identity_cards:{
+    fkey_user_identity_cards:{
         desc: `List of user identity cards for this city.`,
         validation: {}
     },
-    fr_user_corporate_infos:{
+    fkey_user_corporate_infos:{
         desc: `List of user corporate infos for this city.`,
         validation: {}
     },
-    fr_newsletter_tracking_log_infos:{
+    fkey_newsletter_tracking_log_infos:{
         desc: `List of newsletter tracking log for this city.`,
         validation: {}
     },
-    fr_business:{
+    fkey_business:{
         desc: `List of business infos for this city.`,
         validation: {}
     },
@@ -206,39 +206,39 @@ export class CityEntity implements EntityCRUDTypeDefinition {
 
     @Field(() => StateEntity, {
         nullable: true, 
-        description: meta.fr_state.desc, 
+        description: meta.fkey_state.desc, 
     }) 
-    @ManyToOne(() => StateEntity, (entity: StateEntity) => entity.fr_cities)
+    @ManyToOne(() => StateEntity, (entity: StateEntity) => entity.fkey_cities)
     @JoinColumn({ name: `${CityEntity.colprefix}state_id` })
-    fr_state?: StateEntity;
+    fkey_state?: StateEntity;
 
     @Field(() => TimezoneEntity, {
         nullable: true, 
-        description: meta.fr_timezone.desc, 
+        description: meta.fkey_timezone.desc, 
     }) 
-    @ManyToOne(() => TimezoneEntity, (entity: TimezoneEntity) => entity.fr_cities)
+    @ManyToOne(() => TimezoneEntity, (entity: TimezoneEntity) => entity.fkey_cities)
     @JoinColumn({ name: `${CityEntity.colprefix}tz_id` })
-    fr_timezone?: TimezoneEntity;
+    fkey_timezone?: TimezoneEntity;
 
-    @Field(() => [UserAddressEntity], {nullable: true, description: meta.fr_user_addresses.desc})
-    @OneToMany(() => UserAddressEntity, (entity: UserAddressEntity) => entity.fr_city) 
-    fr_user_addresses?: UserAddressEntity[];
+    @Field(() => [UserAddressEntity], {nullable: true, description: meta.fkey_user_addresses.desc})
+    @OneToMany(() => UserAddressEntity, (entity: UserAddressEntity) => entity.fkey_city) 
+    fkey_user_addresses?: UserAddressEntity[];
 
-    @Field(() => [UserIdentityCardEntity], {nullable: true, description: meta.fr_user_identity_cards.desc})
-    @OneToMany(() => UserIdentityCardEntity, (entity: UserIdentityCardEntity) => entity.fr_city)
-    fr_user_identity_cards?: UserIdentityCardEntity[];
+    @Field(() => [UserIdentityCardEntity], {nullable: true, description: meta.fkey_user_identity_cards.desc})
+    @OneToMany(() => UserIdentityCardEntity, (entity: UserIdentityCardEntity) => entity.fkey_city)
+    fkey_user_identity_cards?: UserIdentityCardEntity[];
 
-    @Field(() => [UserCorporateInfoEntity], {nullable: true, description: meta.fr_user_corporate_infos.desc})
-    @OneToMany(() => UserCorporateInfoEntity, (entity: UserCorporateInfoEntity) => entity.fr_city)
-    fr_user_corporate_infos?: UserCorporateInfoEntity[];
+    @Field(() => [UserCorporateInfoEntity], {nullable: true, description: meta.fkey_user_corporate_infos.desc})
+    @OneToMany(() => UserCorporateInfoEntity, (entity: UserCorporateInfoEntity) => entity.fkey_city)
+    fkey_user_corporate_infos?: UserCorporateInfoEntity[];
 
-    @Field(() => [NewsLetterTrackLogEntity], {nullable: true, description: meta.fr_newsletter_tracking_log_infos.desc})
-    @OneToMany(() => NewsLetterTrackLogEntity, (entity: NewsLetterTrackLogEntity) => entity.fr_city)
-    fr_newsletter_tracking_log_infos?: NewsLetterTrackLogEntity[]; 
+    @Field(() => [NewsLetterTrackLogEntity], {nullable: true, description: meta.fkey_newsletter_tracking_log_infos.desc})
+    @OneToMany(() => NewsLetterTrackLogEntity, (entity: NewsLetterTrackLogEntity) => entity.fkey_city)
+    fkey_newsletter_tracking_log_infos?: NewsLetterTrackLogEntity[]; 
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_business.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_city)
-    fr_business?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_business.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_city)
+    fkey_business?: BusinessEntity[];
 
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
 

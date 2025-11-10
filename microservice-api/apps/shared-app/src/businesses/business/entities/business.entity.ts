@@ -272,63 +272,63 @@ deleted: {
 
 };
 const  BusinessVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-  fr_connection_source: {
+  fkey_connection_source: {
     desc: `connection sources.`,
     validation: {}
   },
-  fr_owner_user: {
+  fkey_owner_user: {
     desc: `business primary categories.`,
     validation: {}
   },
-  fr_primary_categories: {
+  fkey_primary_categories: {
     desc: `business primary categories.`,
     validation: {}
   },
-  fr_secondary_categories1: {
+  fkey_secondary_categories1: {
     desc: `business secondary categories level 1.`,
     validation: {}
   },
-  fr_secondary_categories2: {
+  fkey_secondary_categories2: {
     desc: `business secondary categories level 2.`,
     validation: {}
   },
-  fr_secondary_categories3: {
+  fkey_secondary_categories3: {
     desc: `business secondary categories level 3.`,
     validation: {}
   },
-  fr_secondary_categories4: {
+  fkey_secondary_categories4: {
     desc: `business secondary categories level 4.`,
     validation: {}
   },
-  fr_secondary_categories5: {
+  fkey_secondary_categories5: {
     desc: `business secondary categories level 5.`,
     validation: {}
   },
-  fr_secondary_categories6: {
+  fkey_secondary_categories6: {
     desc: `business secondary categories level 6.`,
     validation: {}
   },
-  fr_secondary_categories7: {
+  fkey_secondary_categories7: {
     desc: `business secondary categories level 7.`,
     validation: {}
   },
-  fr_secondary_categories8: {
+  fkey_secondary_categories8: {
     desc: `business secondary categories level 8.`,
     validation: {}
   },
-  fr_secondary_categories9: {
+  fkey_secondary_categories9: {
     desc: `business secondary categories level 9.`,
     validation: {}
   },
-  fr_countries: {
+  fkey_countries: {
     desc: `business countries.`,
     validation: {}
   },
-  fr_state: {
+  fkey_state: {
     desc: `business states.`,
     validation: {}
   },
-  fr_city: {
+  fkey_city: {
     desc: `business cities.`,
     validation: {}
   },
@@ -904,123 +904,123 @@ export class BusinessEntity implements EntityCRUDTypeDefinition {
 
     @Field(() => ConnectionSourceEntity, {
         nullable: true, 
-        description: meta.fr_connection_source.desc,
+        description: meta.fkey_connection_source.desc,
     })
-    @ManyToOne(() => ConnectionSourceEntity, (entity: ConnectionSourceEntity) => entity.fr_business_connection_source)
+    @ManyToOne(() => ConnectionSourceEntity, (entity: ConnectionSourceEntity) => entity.fkey_business_connection_source)
     @JoinColumn({ name: `${BusinessEntity.colprefix}connsrc_id` })
-    fr_connection_source?: ConnectionSourceEntity;
+    fkey_connection_source?: ConnectionSourceEntity;
 
     @Field(() => UserEntity, {
         nullable: true, 
-        description: meta.fr_owner_user.desc,
+        description: meta.fkey_owner_user.desc,
     })
-    @ManyToOne(() => UserEntity, (entity: UserEntity) => entity.fr_business_user)
+    @ManyToOne(() => UserEntity, (entity: UserEntity) => entity.fkey_business_user)
     @JoinColumn({ name: `${BusinessEntity.colprefix}owner_u_id` })
-    fr_owner_user?: UserEntity;
+    fkey_owner_user?: UserEntity;
 
     @Field(() => BusinessPrimaryCategoryEntity, {
         nullable: true, 
-        description: meta.fr_primary_categories.desc,
+        description: meta.fkey_primary_categories.desc,
     })
-    @ManyToOne(() => BusinessPrimaryCategoryEntity, (entity: BusinessPrimaryCategoryEntity) => entity.fr_secondary_categories)
+    @ManyToOne(() => BusinessPrimaryCategoryEntity, (entity: BusinessPrimaryCategoryEntity) => entity.fkey_secondary_categories)
     @JoinColumn({ name: `${BusinessEntity.colprefix}buspricat_id` })
-    fr_primary_categories?: BusinessPrimaryCategoryEntity;
+    fkey_primary_categories?: BusinessPrimaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories1.desc,
+      description: meta.fkey_secondary_categories1.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories1)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories1)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_1` })
-    fr_secondary_categories1?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories1?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories2.desc,
+      description: meta.fkey_secondary_categories2.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories2)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories2)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_2` })
-    fr_secondary_categories2?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories2?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories3.desc,
+      description: meta.fkey_secondary_categories3.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories3)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories3)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_3` })
-    fr_secondary_categories3?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories3?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories4.desc,
+      description: meta.fkey_secondary_categories4.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories4)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories4)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_4` })
-    fr_secondary_categories4?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories4?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories5.desc,
+      description: meta.fkey_secondary_categories5.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories5)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories5)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_5` })
-    fr_secondary_categories5?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories5?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories6.desc,
+      description: meta.fkey_secondary_categories6.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories6)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories6)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_6` })
-    fr_secondary_categories6?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories6?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories7.desc,
+      description: meta.fkey_secondary_categories7.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories7)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories7)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_7` })
-    fr_secondary_categories7?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories7?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories8.desc,
+      description: meta.fkey_secondary_categories8.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories8)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories8)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_8` })
-    fr_secondary_categories8?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories8?: BusinessSecondaryCategoryEntity;
 
     @Field(() => BusinessSecondaryCategoryEntity, {
       nullable: true,
-      description: meta.fr_secondary_categories9.desc,
+      description: meta.fkey_secondary_categories9.desc,
     })
-    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fr_buiss_sec_categories9)
+    @ManyToOne(() => BusinessSecondaryCategoryEntity, (entity: BusinessSecondaryCategoryEntity) => entity.fkey_buiss_sec_categories9)
     @JoinColumn({ name: `${BusinessEntity.colprefix}busseccat_id_9` })
-    fr_secondary_categories9?: BusinessSecondaryCategoryEntity;
+    fkey_secondary_categories9?: BusinessSecondaryCategoryEntity;
 
     @Field(() => CountryEntity, {
       nullable: true, 
-      description: meta.fr_countries.desc,
+      description: meta.fkey_countries.desc,
     })
-    @ManyToOne(() => CountryEntity, (entity: CountryEntity) => entity.fr_business)
+    @ManyToOne(() => CountryEntity, (entity: CountryEntity) => entity.fkey_business)
     @JoinColumn({ name: `${BusinessEntity.colprefix}country_id` })
-    fr_countries?: CountryEntity;
+    fkey_countries?: CountryEntity;
 
     @Field(() => StateEntity, {
       nullable: true, 
-      description: meta.fr_state.desc,
+      description: meta.fkey_state.desc,
     })
-    @ManyToOne(() => StateEntity, (entity: StateEntity) => entity.fr_business)
+    @ManyToOne(() => StateEntity, (entity: StateEntity) => entity.fkey_business)
     @JoinColumn({ name: `${BusinessEntity.colprefix}state_id` })
-    fr_state?: StateEntity;
+    fkey_state?: StateEntity;
 
     @Field(() => CityEntity, {
       nullable: true, 
-      description: meta.fr_city.desc,
+      description: meta.fkey_city.desc,
     })
-    @ManyToOne(() => CityEntity, (entity: CityEntity) => entity.fr_business)
+    @ManyToOne(() => CityEntity, (entity: CityEntity) => entity.fkey_business)
     @JoinColumn({ name: `${BusinessEntity.colprefix}city_id` })
-    fr_city?: CityEntity;
+    fkey_city?: CityEntity;
 
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
 }

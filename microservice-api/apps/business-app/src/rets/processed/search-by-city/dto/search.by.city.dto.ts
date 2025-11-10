@@ -33,5 +33,5 @@ export class ProcessedSearchByCityDto extends ProcessedSearchByCityEntity implem
      declare updated?: any;
      declare deleted?: any; 
 
-     declare fr_mlsp_id?:any;    
+     declare fkey_mlsp_id?:any;    
 }

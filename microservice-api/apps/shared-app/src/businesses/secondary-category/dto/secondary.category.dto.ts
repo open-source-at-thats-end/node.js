@@ -31,5 +31,5 @@ export class BusinessSecondaryCategoryDto extends BusinessSecondaryCategoryEntit
      declare updated?: any;
      declare deleted?: any; 
  
-     declare fr_primary_categories?: any;
+     declare fkey_primary_categories?: any;
 }

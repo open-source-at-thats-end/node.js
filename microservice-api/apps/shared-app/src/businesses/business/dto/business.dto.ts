@@ -76,19 +76,19 @@ export class BusinessDto extends BusinessEntity implements FindInputDtoCRUDTypeD
      declare updated?: any;
      declare deleted?: any; 
  
-     declare fr_owner_user?: any;
-     declare fr_connection_source?: any;
-     declare fr_primary_categories?: any;
-     declare fr_secondary_categories1?: any;
-     declare fr_secondary_categories2?: any;
-     declare fr_secondary_categories3?: any;
-     declare fr_secondary_categories4?: any;
-     declare fr_secondary_categories5?: any;
-     declare fr_secondary_categories6?: any;
-     declare fr_secondary_categories7?: any;
-     declare fr_secondary_categories8?: any;
-     declare fr_secondary_categories9?: any;
-     declare fr_countries?: any;
-     declare fr_state?: any;
-     declare fr_city?: any;
+     declare fkey_owner_user?: any;
+     declare fkey_connection_source?: any;
+     declare fkey_primary_categories?: any;
+     declare fkey_secondary_categories1?: any;
+     declare fkey_secondary_categories2?: any;
+     declare fkey_secondary_categories3?: any;
+     declare fkey_secondary_categories4?: any;
+     declare fkey_secondary_categories5?: any;
+     declare fkey_secondary_categories6?: any;
+     declare fkey_secondary_categories7?: any;
+     declare fkey_secondary_categories8?: any;
+     declare fkey_secondary_categories9?: any;
+     declare fkey_countries?: any;
+     declare fkey_state?: any;
+     declare fkey_city?: any;
 }

@@ -71,27 +71,27 @@ const StateEntityFieldMeta: EntityMetaCRUDTypeDefinition = {
 };
 
 const  StateVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-    fr_country: {
+    fkey_country: {
         desc: `Country info of the state.`,
         validation:{}
     },
-    fr_cities: {
+    fkey_cities: {
         desc: `List of cities for this state.`,
         validation:{}
     },
-    fr_user_addresses:{
+    fkey_user_addresses:{
         desc: `List of user address in this state.`,
         validation:{}
     },
-    fr_user_identity_cards:{
+    fkey_user_identity_cards:{
         desc: `List of user identity cards for this state.`,
         validation: {}
     },
-    fr_user_corporate_infos:{
+    fkey_user_corporate_infos:{
         desc: `List of user corporate infos for this state.`,
         validation: {}
     },
-    fr_business:{
+    fkey_business:{
         desc: `List of business infos for this state.`,
         validation: {}
     },
@@ -249,35 +249,35 @@ export class StateEntity implements EntityCRUDTypeDefinition {
     
     @Field(() => CountryEntity, { 
         nullable: true, 
-        description: meta.fr_country.desc,
+        description: meta.fkey_country.desc,
     })
-    @ManyToOne(() => CountryEntity, (entity: CountryEntity) => entity.fr_states)
+    @ManyToOne(() => CountryEntity, (entity: CountryEntity) => entity.fkey_states)
     @JoinColumn({ name: `${StateEntity.colprefix}country_id` })
-    fr_country?: CountryEntity;
+    fkey_country?: CountryEntity;
 
     @Field(() => [CityEntity], {
         nullable: true, 
-        description: meta.fr_cities.desc,
+        description: meta.fkey_cities.desc,
         //complexity: 1
     })
-    @OneToMany(() => CityEntity, (entity: CityEntity) => entity.fr_state) 
-    fr_cities?: CityEntity[];
+    @OneToMany(() => CityEntity, (entity: CityEntity) => entity.fkey_state) 
+    fkey_cities?: CityEntity[];
 
-    @Field(() => [UserAddressEntity], {nullable: true, description: meta.fr_user_addresses.desc})
-    @OneToMany(() => UserAddressEntity, (entity: UserAddressEntity) => entity.fr_state) 
-    fr_user_addresses?: UserAddressEntity[];
+    @Field(() => [UserAddressEntity], {nullable: true, description: meta.fkey_user_addresses.desc})
+    @OneToMany(() => UserAddressEntity, (entity: UserAddressEntity) => entity.fkey_state) 
+    fkey_user_addresses?: UserAddressEntity[];
 
-    @Field(() => [UserIdentityCardEntity], {nullable: true, description: meta.fr_user_identity_cards.desc})
-    @OneToMany(() => UserIdentityCardEntity, (entity: UserIdentityCardEntity) => entity.fr_state)
-    fr_user_identity_cards?: UserIdentityCardEntity[];
+    @Field(() => [UserIdentityCardEntity], {nullable: true, description: meta.fkey_user_identity_cards.desc})
+    @OneToMany(() => UserIdentityCardEntity, (entity: UserIdentityCardEntity) => entity.fkey_state)
+    fkey_user_identity_cards?: UserIdentityCardEntity[];
 
-    @Field(() => [UserCorporateInfoEntity], {nullable: true, description: meta.fr_user_corporate_infos.desc})
-    @OneToMany(() => UserCorporateInfoEntity, (entity: UserCorporateInfoEntity) => entity.fr_state)
-    fr_user_corporate_infos?: UserCorporateInfoEntity[];
+    @Field(() => [UserCorporateInfoEntity], {nullable: true, description: meta.fkey_user_corporate_infos.desc})
+    @OneToMany(() => UserCorporateInfoEntity, (entity: UserCorporateInfoEntity) => entity.fkey_state)
+    fkey_user_corporate_infos?: UserCorporateInfoEntity[];
 
-    @Field(() => [BusinessEntity], {nullable: true, description: meta.fr_business.desc})
-    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fr_state)
-    fr_business?: BusinessEntity[];
+    @Field(() => [BusinessEntity], {nullable: true, description: meta.fkey_business.desc})
+    @OneToMany(() => BusinessEntity, (entity: BusinessEntity) => entity.fkey_state)
+    fkey_business?: BusinessEntity[];
 
     // ████ EXTERNAL RELATIONS ████████████████████████████████████████████████
 }
