@@ -14,7 +14,7 @@ import { BusinessEntity } from "apps/shared-app/src/businesses/business/entities
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")') // TODO: SUPERGRAPH_FOREIGN_RELATION step 1 - add directive
 @Entity({
-  name: `geo_state`,
+  name: ``,
   engine: `InnoDB`,
 })
 @Unique(`${UnIndexPrefix}state_country_id`,[`country_id`, `name`, `type`])

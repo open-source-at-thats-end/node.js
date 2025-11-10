@@ -7,7 +7,7 @@ import { RetsMlsProviderEntity } from "../../../listings/mls-provider/entities/m
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
-  name: 'rets_processed_search_by_mls',
+  name: '',
   engine: 'InnoDB',
 })
 export class ProcessedSearchByMlsEntity implements EntityCRUDTypeDefinition {

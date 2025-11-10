@@ -14,7 +14,7 @@ import { TimezoneEntity } from "../../timezone/entities/timezone.entity";
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
-  name: `geo_city`,
+  name: ``,
   engine: `InnoDB`,
 })
 @Unique(`${UnIndexPrefix}city_state_id`,[`state_id`, `name`, `latitude`])

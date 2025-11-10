@@ -18,7 +18,7 @@ import { BusinessEntity } from "apps/shared-app/src/businesses/business/entities
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
-  name: 'geo_country',
+  name: '',
   engine: 'InnoDB',
 })
 

@@ -13,7 +13,7 @@ import { ConnectionSourceEntity } from "apps/shared-app/src/leads/connection/sou
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
-  name: 'business',
+  name: '',
   engine: 'InnoDB',
 })
 

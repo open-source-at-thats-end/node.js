@@ -9,7 +9,7 @@ import { DateTime, EntityCRUDTypeDefinition, EntityMetaCRUDTypeDefinition, Entit
 @Directive('@shareable')
 @Directive('@key(fields: "id")')
 @Entity({
-  name: 'api_endpoint_auth',
+  name: '',
   engine: 'InnoDB',
 })
 export class ApiEndpointAuthEntity implements EntityCRUDTypeDefinition {

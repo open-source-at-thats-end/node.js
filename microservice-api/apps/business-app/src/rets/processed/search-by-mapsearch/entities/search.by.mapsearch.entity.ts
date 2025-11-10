@@ -6,7 +6,7 @@ import { Directive, Field, Float, Int, ObjectType } from "@nestjs/graphql";
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
-  name: 'rets_processed_search_by_mapsearch',
+  name: '',
   engine: 'InnoDB',
 })
 @Unique(`${UnIndexPrefix}rpsm_mls_num`,[`mls_num`, `mlsp_id`, `street_number`, `street_direction`, `street_name`, `street_suffix`, `city_name`, `state`, `county`, `zipcode`])

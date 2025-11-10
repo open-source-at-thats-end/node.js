@@ -8,7 +8,7 @@ import { BusinessEntity } from "../../business/entities/business.entity";
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
-  name: 'business_secondary_category',
+  name: '',
   engine: 'InnoDB',
 })
 export class BusinessSecondaryCategoryEntity implements EntityCRUDTypeDefinition {
