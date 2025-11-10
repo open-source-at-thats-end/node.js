@@ -5,62 +5,6 @@ import { Directive, Field, Float, Int, ObjectType } from "@nestjs/graphql";
 import { BusinessSecondaryCategoryEntity } from "../../secondary-category/entities/secondary.category.entity";
 import { BusinessEntity } from "../../business/entities/business.entity";
 
-const  BusinessPrimaryCategoryEntityFieldMeta: EntityMetaCRUDTypeDefinition = {
-
-id: {
-    desc: `Unique ID of the business primary category, auto generated.`,
-    validation: {} 
-},
-title: {
-  desc: `Title of the business primary category.`,
-  validation:{
-    maxLength: 128,
-    maxLengthMsg: `Maximum length of title is 128 characters.`
-  }
-},
-desc: {
-    desc: `Description of the business primary category.`,
-    validation:{
-      maxLength: 255,
-      maxLengthMsg: `Maximum length of description is 255 characters.`
-    }
-},
-active: {
-  desc: `Active of the business primary category.`,
-  validation:{}
-},
-created: {
-    desc: `When record is created, date-time will be saved.`,
-    validation:{}
-},
-updated: {
-    desc: `When record is updated, date-time will be saved.`,
-    validation:{}
-},
-deleted: {
-    desc: `When record is soft deleted or soft removed, date-time will be saved otherwise null to indicate record is not deleted.`,
-    validation:{}
-}
-
-};
-const  BusinessPrimaryCategoryVirtualFieldMeta: EntityMetaCRUDTypeDefinition = {
-
-    fkey_secondary_categories: {
-      desc: `Business secondary category.`,
-      validation: {}
-    }, 
-
-    fkey_business_categories: {
-      desc: `Business primary category.`,
-      validation: {}
-    }, 
-
-    
-
-} 
-export const BusinessPrimaryCategoryEntityMeta = {...BusinessPrimaryCategoryEntityFieldMeta, ...BusinessPrimaryCategoryVirtualFieldMeta};
-const meta = BusinessPrimaryCategoryEntityMeta; // need to use in this file down the line
-
 @ObjectType({ isAbstract: true })
 @Directive('@key(fields: "id")')
 @Entity({
