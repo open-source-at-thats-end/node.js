@@ -62,29 +62,6 @@ export class ApiEndpointAuthEntity implements EntityCRUDTypeDefinition {
   @Index()
   email?: string;
   
-  /**
-   * Minimum 8 charector long
-   * At least one digit 
-   * At least one special character 
-   * At least one uppercase letter
-   * At least one lowercase letter
-   * No leading period or newline
-   * No spaces
-   * Prevents three or more consecutive identical characters.
-   * **/
-  //@Field(() => String, {nullable: true, description: meta.identify.desc})
-  @Column({
-    name: `${ApiEndpointAuthEntity.colprefix}identify`, 
-    type: `text`, 
-    select: false
-  })
-  @MinLength(meta.identify.validation.minLength as number, { message: meta.identify.validation.minLengthMsg })
-  @Matches(meta.identify.validation.matchRegEx as RegExp, {
-    //#pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\S{8,})(?!.*(\w)\1{2})/
-    message: meta.identify.validation?.matchRegExMsg
-  })
-  identify?: string;
-  
   @Field(() => GraphQLJWT, {nullable: true, description: meta.jwt_access_token.desc})
   @Column({
     name: `${ApiEndpointAuthEntity.colprefix}jwt_access_token`, 

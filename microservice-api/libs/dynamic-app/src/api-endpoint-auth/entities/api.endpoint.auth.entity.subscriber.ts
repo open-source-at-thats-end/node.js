@@ -16,15 +16,15 @@ export class ApiEndpointAuthEntitySubscriber implements EntitySubscriberInterfac
         return ApiEndpointAuthEntity;
     }
     async beforeInsert(event: InsertEvent<ApiEndpointAuthEntity>): Promise<any|void> {
-        if(event?.entity?.identify){
-            event.entity.identify = await LibraryAppService.getHash(event.entity.identify);
+        if(event?.entity){
+            // code removed for security reason
         } else {
-            throw new Error('Issue with required field identify/password');
+            throw new Error('Issue with required field password');
         }
     }
     async beforeUpdate?(event: UpdateEvent<ApiEndpointAuthEntity>): Promise<any|void> {
-        if(event?.entity?.identify){
-            event.entity.identify = await LibraryAppService.getHash(event.entity.identify);
+        if(event?.entity){
+            // code removed for security reason
         }
     }
 
